@@ -8,7 +8,7 @@ git clone https://${GH_REF} .old
 cd .old
 git checkout master
 cd ..
-mv .old/.git .public/
+mv .old/.git/ .public/
 
 cd ./public
 git config user.name "roccowang"

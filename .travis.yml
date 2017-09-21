@@ -4,6 +4,7 @@ node_js: stable
 
 before_install:
   - export TZ='Asia/Shanghai'
+  - chmod +x ./publish.sh
 
 install:
   - npm install
