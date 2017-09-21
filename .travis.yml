@@ -39,7 +39,7 @@ env:
 notifications:
   pushover:
     api_key: ${PUSHOVER_APIKEY}
-      users: 
+    users: 
         - ${PUSHOVER_USER}
     on_success: always
     on_failure: always
