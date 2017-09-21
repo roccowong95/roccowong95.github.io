@@ -2,6 +2,11 @@ language: node_js
 
 node_js: stable
 
+cache:
+  apt: true
+  directories:
+    - node_modules
+
 before_install:
   - export TZ='Asia/Shanghai'
   - chmod +x ./publish.sh
@@ -14,14 +19,14 @@ script:
   - hexo g
 
 after_script:
-  - ./publish.sh
-  #- cd ./public
-  #- git init
-  #- git config user.name "roccowang"
-  #- git config user.email "roccowang95@outlook.com"
-  #- git add .
-  #- git commit -m "TravisCI built"
-  #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  #- ./publish.sh
+  - cd ./public
+  - git init
+  - git config user.name "roccowang"
+  - git config user.email "roccowang95@outlook.com"
+  - git add .
+  - git commit -m "TravisCI built"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 branches:
   only:
