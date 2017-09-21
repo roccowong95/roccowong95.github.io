@@ -1,0 +1,24 @@
+language: node_js
+
+node_js: stable
+
+before_install:
+  - export TZ='Asia/Shanghai'
+
+install:
+  - npm install
+
+script:
+  - hexo clean
+  - hexo g
+
+after_script:
+  - bash ./publish.sh
+
+branches:
+  only:
+    - raw
+
+env:
+  global:
+    - GH_REF: github.com/roccowang/roccowang.github.io.git
