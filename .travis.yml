@@ -40,6 +40,6 @@ notifications:
   pushover:
     api_key: ${PUSHOVER_APIKEY}
     users: 
-        - ${PUSHOVER_USER}
+      - ${PUSHOVER_USER}
     on_success: always
     on_failure: always
