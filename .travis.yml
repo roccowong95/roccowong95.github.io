@@ -2,6 +2,12 @@ language: node_js
 
 node_js: stable
 
+notifications:
+  pushover:
+    api_key: ${PUSHOVER_APIKEY}
+    users: 
+      - ${PUSHOVER_USER}
+
 cache:
   apt: true
   directories:
@@ -10,6 +16,9 @@ cache:
 before_install:
   - export TZ='Asia/Shanghai'
   - chmod +x ./publish.sh
+  - echo ${PUSHOVER_USER}
+  - echo haha
+  - echo ${PUSHOVER_APIKEY}
 
 install:
   - npm install
@@ -35,11 +44,3 @@ branches:
 env:
   global:
     - GH_REF: github.com/roccowang/roccowang.github.io.git
-
-notifications:
-  pushover:
-    api_key: ${PUSHOVER_APIKEY}
-    users: 
-      - ${PUSHOVER_USER}
-    on_success: always
-    on_failure: always
