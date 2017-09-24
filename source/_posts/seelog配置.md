@@ -5,6 +5,7 @@ tags:
   - golang
 categories:
   - scribble
+visible: yes
 ---
 
 # 日志等级解释
