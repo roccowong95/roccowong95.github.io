@@ -6,6 +6,7 @@ node_modules/
 public/
 .deploy*/
 .sync/*
+source/_private/*
 
 .me_configs.data
 
@@ -17,3 +18,4 @@ sync_hook.script
 
 **/.Archive
 .md_configs.data
+ 
