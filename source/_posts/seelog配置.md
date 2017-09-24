@@ -7,9 +7,6 @@ categories:
   - scribble
 ---
 
-关于seelog配置的记录
-<!--more-->
-
 # 日志等级解释
 - Trace:
     - 比debug还详细.
@@ -22,6 +19,8 @@ categories:
     - 不致命的大问题(不用退出).
 - Critical:
     - 致命.
+
+<!--more-->
 
 # 一个应用了seelog大部分特性的栗子
 ```
@@ -73,6 +72,5 @@ categories:
     </formats>
 </seelog>
 ```
-test
 
 

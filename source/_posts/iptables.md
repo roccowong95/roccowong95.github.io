@@ -3,7 +3,6 @@ title: iptables
 tags:
   - Linux
   - iptables
-  - 防火墙
 date: 2016-08-09 19:37:26
 ---
 

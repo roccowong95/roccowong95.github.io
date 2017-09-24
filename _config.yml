@@ -4,15 +4,15 @@
 
 # Site
 title: Rocco's Blog
-subtitle: 蠢人多记录
-description:
+subtitle: 
+description: 蠢人多记录
 author: Rocco
 language: zh-Hans
 timezone: Asia/Hong_Kong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://roccowang.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -64,10 +64,29 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+plugin:
+- hexo-generator-feed
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: https://github.com/roccowang/roccowang.github.io
-  branch: master
+#deploy:
+#  type: git
+#  repo: https://github.com/roccowang/roccowang.github.io
+#  branch: master
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: false
+  #content_limit: 140
+  #content_limit_delim - (optional) If content_limit is used to shorten post 
+  #contents, only cut at the last occurrence of this delimiter before reaching 
+  #the character limit. Not used by default.
+  #content_limit_delim: 
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000

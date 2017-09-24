@@ -9,17 +9,6 @@ categories:
 date: 2016-08-12 17:21:05
 ---
 
-进程相关
-<!--more-->
-
-
-# 参考
-- LinuxC一站式学习
-- [Linux 多进程-1][1]
-
----
-
-
 # 进程的几种状态
 ## R
 可执行状态, 进程控制块位于可执行队列中.
@@ -33,7 +22,8 @@ date: 2016-08-12 17:21:05
 僵尸状态.
 ## X
 很短暂的退出状态.
-## and this is a test
+
+<!--more-->
 
 ---
 
@@ -287,7 +277,12 @@ date: 2016-08-12 17:21:05
     }
     ```
     - upper.c实现了一个一个字符转大写然后输出到stdout
-    - wrapper里面修改了自己的stdin, 然后exec了upper, 由于文件描述符的继承, 就实现了重定向
+- wrapper里面修改了自己的stdin, 然后exec了upper, 由于文件描述符的继承, 就实现了重定向
+
+# 参考
+- LinuxC一站式学习
+- [Linux 多进程-1][1]
+    
 
 [1]:https://cnbin.github.io/blog/2015/06/24/linux-duo-jin-cheng-1/
 

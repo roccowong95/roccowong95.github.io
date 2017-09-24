@@ -5,16 +5,10 @@ tags:
 - 运维
 ---
 
-strace
-<!--more-->
-
-# 参考
-[strace(1) - Linux man page][1]
-
----
-
 # 简介
-`strace(1)`命令可以查看系统调用和信号等等信息.
+`strace`命令可以查看系统调用和信号等等信息.
+
+<!--more-->
 
 # 常用选项和参数
 - `-p`: 追踪指定进程, 需要带上`-f`选项来追踪所有的子进程
@@ -32,6 +26,9 @@ strace
 - `-a`: 选择返回值的输出位置, 默认是第40列
 - `-s`: 指定输出字符串的最大长度, 默认是32, 文件名一直全部输出
 - `-u`: 以username的UID和GID执行被跟踪的命令
+
+# 参考
+[strace(1) - Linux man page][1]
 
 [1]:http://linux.die.net/man/1/strace
 
