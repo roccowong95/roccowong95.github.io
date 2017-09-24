@@ -2,7 +2,9 @@
 title: seelog配置
 date: 2016-10-03 09:59:37
 tags:
-  - Golang
+  - golang
+categories:
+  - scribble
 ---
 
 关于seelog配置的记录
@@ -72,3 +74,5 @@ tags:
 </seelog>
 ```
 test
+
+

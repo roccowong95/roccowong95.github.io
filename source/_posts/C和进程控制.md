@@ -3,6 +3,9 @@ title: C和进程控制
 tags:
   - Linux
   - C/C++
+
+categories:
+  - Learn
 date: 2016-08-12 17:21:05
 ---
 

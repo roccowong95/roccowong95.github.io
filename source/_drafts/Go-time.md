@@ -1,7 +1,7 @@
 ---
 title: Go-time
 tags:
-  - Go
+  - golang
   - 时间处理
 ---
 

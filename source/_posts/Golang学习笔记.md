@@ -2,7 +2,7 @@
 title: Golang学习笔记
 date: 2016-09-22 09:48:14
 tags:
-  - Go
+  - golang
 ---
 
 学 go 的时候怕记不住的语法啥的

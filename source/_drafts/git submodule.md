@@ -1,6 +1,9 @@
 ---
 title: git submodule
 tags:
+  - git
+category:
+  - Learn
 date: 2017-09-24 14:19:02
 ---
 

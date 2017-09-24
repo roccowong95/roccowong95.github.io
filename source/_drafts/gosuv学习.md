@@ -2,7 +2,7 @@
 title: gosuv学习
 date: 2016-10-03 11:05:59
 tags:
-  - Golang
+  - golang
 ---
 
 gosuv学习, 里面涉及很多的包

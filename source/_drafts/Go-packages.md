@@ -1,7 +1,7 @@
 ---
 title: Go-packages
 tags:
-  - Go
+  - golang
 ---
 
 Go 包的相关知识

@@ -1,7 +1,7 @@
 ---
 title: Go-JSON
 tags:
-  - Go
+  - golang
   - JSON
 ---
 
