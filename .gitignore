@@ -18,4 +18,4 @@ sync_hook.script
 
 **/.Archive
 .md_configs.data
- 
+source/.MWebMetaData/*
