@@ -4,6 +4,7 @@ tags:
   - Linux
   - C/C++
   - gdb
+  - shell
 date: 2016-08-10 09:41:18
 ---
 

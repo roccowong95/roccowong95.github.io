@@ -2,7 +2,8 @@
 title: iptables
 tags:
   - Linux
-  - iptables
+  - shell
+  - 运维
 date: 2016-08-09 19:37:26
 ---
 

@@ -3,6 +3,7 @@ title: strace操作
 tags:
 - Linux
 - 运维
+- shell
 ---
 
 # 简介
