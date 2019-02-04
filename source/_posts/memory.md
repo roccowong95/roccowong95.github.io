@@ -1,33 +1,10 @@
 ---
-title: 内存
+title: 内存杂烩
 date: 2019-02-04 15:41:55
 tags: [Linux]
 category: [digest]
 description: 内存相关内容.
 ---
-
-# 参考
-[内存观点][1]
-[深入理解Linux内存管理-之-目录导航 - AderStep - CSDN博客][2]
-[Go Memory Management - Povilas Versockas][3]
-[Linux_Memory_Address_Mapping.pdf][4]
-[cpu - What is the Global Descriptor Table memory type? - Electrical Engineering Stack Exchange][5]
-[X86 Assembly/Global Descriptor Table - Wikibooks, open books for an open world][6]
-[Deep dive into linux memory management | TechTalks][7]
-[Linux Kernel: Memory Addressing – Hungys.blog() – Medium][8]
-[Understanding memory information on Linux systems - Linux Audit][10]
-[memory - Why do the data and code segments completely overlap in Linux? - Unix & Linux Stack Exchange][11]
-[linux kernel - Why using hierarchical page tables? - Stack Overflow][12]
-[memory management - Multi-level page tables Hierarchical paging - Stack Overflow][13]
-[linux kernel - Why using hierarchical page tables? - Stack Overflow][14]
-[NUMA架构的CPU -- 你真的用好了么？ • cenalulu's Tech Blog][15]
-[The MySQL “swap insanity” problem and the effects of the NUMA architecture – Jeremy Cole][16]
-[/proc/meminfo之谜 | Linux Performance][17]
-[linux - What are memory mapped page and anonymous page? - Stack Overflow][18]
-[linux - How do pdflush, kjournald, swapd, etc interoperate? - Unix & Linux Stack Exchange][19]
-[linux pagecache bdi writeback 机制 - qqqqqq999999的专栏 - CSDN博客][20]
-[linux - Difference between vm.dirty_ratio and vm.dirty_background_ratio? - Stack Overflow][21]
-
 
 # x86架构下的分段机制
 
@@ -41,14 +18,14 @@ description: 内存相关内容.
 
 # 内存寻址过程
 
-![](https://ws2.sinaimg.cn/large/006tNbRwly1fy3ckwaxf8j30qc0k4q4o.jpg)@w=400
+![](https://ws2.sinaimg.cn/large/006tNbRwly1fy3ckwaxf8j30qc0k4q4o.jpg)
 
 当一条指令需要访问内存时, 会由逻辑地址-> 线性地址(虚拟地址)-> 物理内存地址, 最终得到真正需要读取的内存地址.
 
 ## 三类地址
 ### 逻辑地址
 逻辑地址由段选择码(segment selector)和偏移量(offset)组成.
-![](https://ws3.sinaimg.cn/large/006tNbRwly1fy3ecqix4uj30ma0a2wfh.jpg)@w=400
+![](https://ws3.sinaimg.cn/large/006tNbRwly1fy3ecqix4uj30ma0a2wfh.jpg)
 
 ### 线性地址
 虚拟地址是进程视角的内存地址.
@@ -73,7 +50,7 @@ GDT,LDT 表的位置和大小, 存放在GDTR,LDTR 寄存器里.
 
 ## 逻辑地址->线性地址(段机制)
 
-![](https://ws1.sinaimg.cn/large/006tNbRwly1fy4hveyb98j30ni0dqwfn.jpg)@w=400
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fy4hveyb98j30ni0dqwfn.jpg)
 
 1. 根据指令性质, 决定去读哪个段寄存器(CS, ES, DS, FS, GS, SS)中的段选择码.
 2. 根据选择码中的TI确定需要去哪张表(GDT, LDT)找段描述符, 以及去读哪个寄存器(GDTR, LDTR).
@@ -82,7 +59,7 @@ GDT,LDT 表的位置和大小, 存放在GDTR,LDTR 寄存器里.
     * 判断是否越权.
 4. 描述符中的 base addr+指令中的 offset, 得到线性地址.
 
-![](https://ws1.sinaimg.cn/large/006tNbRwly1fy4hlkzp7mj30se0fgab8.jpg)@w=400
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fy4hlkzp7mj30se0fgab8.jpg)
 
 如上图所示, linux 中只使用了代码段和数据段, 再往下深究可以发现, 代码段和数据段的起始线性地址都是0x00000000, 段限都是0xfffffff(4GB), 这样逻辑地址在计算后会得到与之相同的线性(虚拟)地址, 实际上就是偏移(offset). 具体的分析可以看上面的[Linux_Memory_Address_Mapping.pdf](http://www.ilinuxkernel.com/files/Linux_Memory_Address_Mapping.pdf).
 
@@ -90,7 +67,7 @@ GDT,LDT 表的位置和大小, 存放在GDTR,LDTR 寄存器里.
 
 ## 线性地址->物理地址(页机制)
 
-![](https://ws4.sinaimg.cn/large/006tNbRwly1fy4l978dwvj30ve0ieq4n.jpg)@w=500
+![](https://ws4.sinaimg.cn/large/006tNbRwly1fy4l978dwvj30ve0ieq4n.jpg)
 上面的 cr3寄存器, 保存在每个进程的mm_struct 数据结构中.
 线性地址是连续的, 实际上并不是. 分页机制使得内存分配更为灵活, 并且允许进程的线性地址空间比物理内存大.
 32位的情况下, 我们的进程虚拟内存空间最大就4GB, 所以32位机器的物理内存如果再大的话, 也没啥用了(启用 PAE 扩展的情况下, 可以使物理总线达到36根, 从而能够允许进程访问64GB 的虚拟内存. [PAE可以看这里][4]).
@@ -99,13 +76,13 @@ GDT,LDT 表的位置和大小, 存放在GDTR,LDTR 寄存器里.
 
 # 内存管理
 
-![](https://ws1.sinaimg.cn/large/006tNbRwgy1fy53m82cicj30e20900sp.jpg)@w=600
+![](https://ws1.sinaimg.cn/large/006tNbRwgy1fy53m82cicj30e20900sp.jpg)
 
 ## numa
 
 uma 架构下, 所有 cpu 访问内存走的是一组总线, 这样很容易导致瓶颈发生.
 
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fy4y1pyc1cj30nj0dyq3j.jpg)@w=400
+![](https://ws3.sinaimg.cn/large/006tNbRwgy1fy4y1pyc1cj30nj0dyq3j.jpg)
 
 numa架构下, 处理器与几个内存相关联, 组成 node, node又进一步分为若干 zone. node 内部的访问很快, node 之间的访问会慢一些, 这样整体提高了吞吐量, 但也会带来一些问题, 可能会导致内存在不同的 node 间分布不均. 见[这里][16].
 
@@ -127,13 +104,13 @@ numa架构下, 处理器与几个内存相关联, 组成 node, node又进一步�
 
 ## 伙伴算法
 
-![](https://ws1.sinaimg.cn/large/006tNbRwly1fy4m1av5y4j319g0sqdko.jpg)@w=600
+![](https://ws1.sinaimg.cn/large/006tNbRwly1fy4m1av5y4j319g0sqdko.jpg)
 这样的算法能够实现物理内存的分配, 但也带来了内部碎片问题.
 
 ## slab
 slab 机制能够为内核较小较频繁的内存申请提供方便. 当 slab 为较小的内存申请分配内存并且用完归还时, 他并不直接返回, 而是缓存起来, 等待下次小量内存申请使用, 这样避免了频繁的物理内存分配与回收.
 
-![](https://ws1.sinaimg.cn/large/006tNbRwgy1fy4x8l2aiqj30cv02jaaa.jpg)@w=400
+![](https://ws1.sinaimg.cn/large/006tNbRwgy1fy4x8l2aiqj30cv02jaaa.jpg)
 
 # [内存分配参数(/proc/sys/vm)][7]
 
@@ -153,6 +130,28 @@ slab 机制能够为内核较小较频繁的内存申请提供方便. 当 slab �
     * 假设只有一层页表. 我们
     * [这里][12]有个问题: 考虑一个64位机器, 4KB 页, 4GB 物理内存.
 
+
+# 参考
+[内存观点][1]
+[深入理解Linux内存管理-之-目录导航 - AderStep - CSDN博客][2]
+[Go Memory Management - Povilas Versockas][3]
+[Linux_Memory_Address_Mapping.pdf][4]
+[cpu - What is the Global Descriptor Table memory type? - Electrical Engineering Stack Exchange][5]
+[X86 Assembly/Global Descriptor Table - Wikibooks, open books for an open world][6]
+[Deep dive into linux memory management | TechTalks][7]
+[Linux Kernel: Memory Addressing – Hungys.blog() – Medium][8]
+[Understanding memory information on Linux systems - Linux Audit][10]
+[memory - Why do the data and code segments completely overlap in Linux? - Unix & Linux Stack Exchange][11]
+[linux kernel - Why using hierarchical page tables? - Stack Overflow][12]
+[memory management - Multi-level page tables Hierarchical paging - Stack Overflow][13]
+[linux kernel - Why using hierarchical page tables? - Stack Overflow][14]
+[NUMA架构的CPU -- 你真的用好了么？ • cenalulu's Tech Blog][15]
+[The MySQL “swap insanity” problem and the effects of the NUMA architecture – Jeremy Cole][16]
+[/proc/meminfo之谜 | Linux Performance][17]
+[linux - What are memory mapped page and anonymous page? - Stack Overflow][18]
+[linux - How do pdflush, kjournald, swapd, etc interoperate? - Unix & Linux Stack Exchange][19]
+[linux pagecache bdi writeback 机制 - qqqqqq999999的专栏 - CSDN博客][20]
+[linux - Difference between vm.dirty_ratio and vm.dirty_background_ratio? - Stack Overflow][21]
 
 
 [1]: http://www.kerneltravel.net/journal/v/mem.htm
