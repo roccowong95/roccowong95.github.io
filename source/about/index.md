@@ -1,7 +1,6 @@
 ---
 title: about
-date: 2017-09-24 15:20:18
+date: 2019-02-02 21:19:21
+type: about
+comment: false
 ---
-
-
-

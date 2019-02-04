@@ -1,21 +1,12 @@
 language: node_js
 node_js: stable
 notifications:
-  pushover:
-    api_key:
-      secure: BnWyI8zsg33nnN71KuoLWw0Z3pG6s0Ysd+e5VDP8PkrZy+IhHERajLZQ/2+FH+r1ynqLLSUtaskvY3WqjHbEbPu4nXQvro5tkIavdU8J+jBAmb7RiVBxIO08b4Sp9x2/NWBFfUDcj4p8oFoOLvTcdPB0AK3pBmVG4BOS730hmDS5hKYcZcfyl1H/j75v+6xngkvajofMa8koRTRi0zYzSlsWfPM0l+8cB5u6/vq7uRTay2HSFt3J/vk08KDvZxBULfz8bTkSBeGcijB5rdPPx/iHGBKFq+o0e6gbyDV7UnSY049qJylDteEK+YbbfGkU+Pg+RlezO4Nq2/JUb/pkLhMH/g8fHxzdsL4BfIpJ/VdjFhl9YVSx+RgMsJjI96duyqDikURLwBMdPfnPc7XqIGKP0nFFLP719pVHjyorCzeV5VKcoMcqUaxnp6iFC+b7RmmiMBA8DpHhtZfrst0N/8SThaoON6DnUhOwrtutW9kzXRl765zC6LRWZA4fdglCWTDc/t0SG0B5j3zwUq7PG6CkdWwj9XE8MO6AbXFf0F4tyW4FuKBOkZM3TLhUHy28D8dihBa8/y0M5XCujmItaRa/HNQWnXUPXV3JblvyBG1xK6vCAYPbVPIpsazZxFAVvsMP7Tb60EcugutKtx4xo5fYFv5fHEowbEhpkdR16qA=
-    users:
-    - secure: pyYs4kg954kTG8x/7kArews6uT1zWu8joJ8+Cq2h4YwzV1Z14z2Mg3vlYxCjkjFc4UXgJSE4d5H1sf9raRVXbx0MyUjsHym1wodVa57QS3UY/Kc5Na+I1v3INWSoP4X7laBtXQ+CN4WLtey7F3P60L1tYE5dSyOTnF+51Ca3oWQm9xK8Wmb/FpovD5vMTr+TlherkepQtW+eiu/nlzPg8Kmsqtvf29Kq775bkS+HKDsBE+Ab9EC/qAQrqLNgKuiircVvTC4cRnmztjJvTIQO/5gviPyWkm1uP4HklMuNzmvspzjPdTBxos/JWa5aSusw7XWNfxh8KUvHe1IHRdF25DpNNpwpc7uUkfvy2X8lE3OBoIWH7o/7C86z6v5dHHaND9p15uSdIV11Rub9J+6zLJOHpRa+nudLI73twChTMEuQLGj0Ryh2OcyR+xTwIphHpdHzAB4JCM2dwYxon3pacL9gUbkKIbCmtXFGuQRypBBVHclznIgPsxzTWVsEk5pfntbWTEcDRC2WAzxgol6Jh6843GVk0LFpk8Ji9lWfLxtAnGLwlAwp7JMMGHg8zEiSrOx+TExne6yDQ1DUHJpUgPsEiUZL6XYMZLMatH6gRDMnqG4nla1Uq6nsMqZ0AjcYYYR6zGKPfbqc32RRZ5Hl6JQ/mKU5ggOoAfeiJKfQxBQ=
 cache:
   apt: true
   directories:
   - node_modules
 before_install:
 - export TZ='Asia/Shanghai'
-- chmod +x ./publish.sh
-- echo ${PUSHOVER_USER}
-- echo haha
-- echo ${PUSHOVER_APIKEY}
 install:
 - npm install
 script:
