@@ -30,7 +30,7 @@ read_more_btn: false
 gitalk:
   enable: false
   github_id: roccowang # Github repo owner
-  repo:  roccowang.github.io# Repository name to store issues.
+  repo:  roccowang.github.io # Repository name to store issues.
   client_id:  c76dae1746f7c61402f4 # Github Application Client ID
   client_secret:  29a5791f4cab406b48a766cbe76ca31b73e3b88e # Github Application Client Secret
   admin_user: roccowang # GitHub repo owner and collaborators, only these guys can initialize github issues

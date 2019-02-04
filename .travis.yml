@@ -7,6 +7,7 @@ cache:
   - node_modules
 before_install:
 - export TZ='Asia/Shanghai'
+- export VERSION=1.$(date "+%Y%m%d").$TRAVIS_BUILD_NUMBER
 install:
 - npm install
 script:
@@ -18,7 +19,7 @@ after_script:
 - git config user.name "roccowang"
 - git config user.email "roccowang95@outlook.com"
 - git add .
-- git commit -m "TravisCI built"
+- git commit -m "TravisCI built. ${VERSION}"
 - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 branches:
   only:
