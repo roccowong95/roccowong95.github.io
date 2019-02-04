@@ -1,9 +1,8 @@
 ---
 title: C和socket
-tags:
-- Linux
-- C/C++
-category: [test]
+tags: [Linux,C/C++]
+category: [digest]
+description: ''
 ---
 
 # 参考
@@ -71,3 +70,5 @@ category: [test]
 
 [1]:http://c.biancheng.net/cpp/socket/
 [2]:http://www.cnblogs.com/thankgoodness/articles/3146069.html
+
+
