@@ -7,6 +7,7 @@ title: Rocco's Blog
 subtitle: 
 description: Prepare for the worst.
 author: Rocco
+email: roccowang95@outlook.com
 language: zh-CN
 timezone: Asia/Hong_Kong
 
@@ -85,6 +86,7 @@ feed:
   path: atom.xml
   limit: 20
   content: false
+  order_by: -date
   #content_limit: 140
   #content_limit_delim - (optional) If content_limit is used to shorten post 
   #contents, only cut at the last occurrence of this delimiter before reaching 
