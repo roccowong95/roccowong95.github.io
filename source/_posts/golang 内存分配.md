@@ -1,10 +1,11 @@
 ---
 category: Digest
 created: '2019-02-18T16:35:41.596Z'
-modified: '2019-03-02T19:33:22.604Z'
+description: golang内存分配的简单实现方式学习.
+modified: '2019-03-02T19:38:41.782Z'
 tags:
-- golang
 - memory
+- golang
 title: golang 内存分配
 ---
 
