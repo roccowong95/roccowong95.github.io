@@ -18,10 +18,10 @@ script:
 after_script:
 - cd ./public
 - git init
-- git config user.name "roccowong95"
+- git config user.name "roccowong"
 - git config user.email "roccowong95@outlook.com"
 - echo "# Rocco\'s Blog" > README.md
-- echo '[![Build Status](https://travis-ci.org/roccowong/roccowong95.github.io.svg?branch=raw)](https://travis-ci.org/roccowong/roccowong95.github.io)' >> README.md
+- echo '[![Build Status](https://travis-ci.org/roccowong95/roccowong95.github.io.svg?branch=raw)](https://travis-ci.org/roccowong95/roccowong95.github.io)' >> README.md
 - git add .
 - git commit -m "TravisCI built. ${VERSION}"
 - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
@@ -34,4 +34,4 @@ branches:
   - raw
 env:
   global:
-  - GH_REF: github.com/roccowong/roccowong95.github.io.git
+  - GH_REF: github.com/roccowong95/roccowong95.github.io.git
