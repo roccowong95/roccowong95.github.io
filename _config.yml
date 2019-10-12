@@ -7,13 +7,13 @@ title: Rocco's Blog
 subtitle: 
 description: Prepare for the worst.
 author: Rocco
-email: roccowang95@outlook.com
+email: roccowong95@outlook.com
 language: zh-CN
 timezone: Asia/Hong_Kong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://roccowang.github.io
+url: https://roccowong95.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -78,7 +78,7 @@ plugin:
 ## Docs: https://hexo.io/docs/deployment.html
 #deploy:
 #  type: git
-#  repo: https://github.com/roccowang/roccowang.github.io
+#  repo: https://github.com/roccowong/roccowong95.github.io
 #  branch: master
 
 feed:
