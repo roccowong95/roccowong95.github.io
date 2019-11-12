@@ -9,8 +9,6 @@ tags:
 title: golang 内存分配
 ---
 
-
-
 # 内存划分
 
 span, bitmap, arena. go程序在启动时, 便会申请巨大的空间, 因此go程序的虚拟内存都很大.
@@ -98,5 +96,6 @@ type mheap struct {
 [3]:http://www.cnblogs.com/zkweb/p/7880099.html
 [4]:https://povilasv.me/go-memory-management/
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzYxNzAzOTZdfQ==
+eyJoaXN0b3J5IjpbLTE4MzI5MDkzMDQsLTE5MzYxNzAzOTZdfQ
+==
 -->
