@@ -97,3 +97,6 @@ type mheap struct {
 [2]:https://scvalex.net/posts/29/
 [3]:http://www.cnblogs.com/zkweb/p/7880099.html
 [4]:https://povilasv.me/go-memory-management/
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE5MzYxNzAzOTZdfQ==
+-->
