@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"roccowong95.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null,"show_result":false},"fold":{"enable":false,"height":500},"language":false,"border_radius":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="梳理了一下内存相关的一些内容. 写的有点乱.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存杂烩">
+<meta property="og:url" content="https://roccowong95.github.io/2019/03/02/%E5%86%85%E5%AD%98%E6%9D%82%E7%83%A9/index.html">
+<meta property="og:site_name" content="Rocco&#39;s Blog">
+<meta property="og:description" content="梳理了一下内存相关的一些内容. 写的有点乱.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fy49et602cj302n0ajt8h.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fy3ckwaxf8j30qc0k4q4o.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fy3ecqix4uj30ma0a2wfh.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fy4hveyb98j30ni0dqwfn.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fy4hlkzp7mj30se0fgab8.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fy4l978dwvj30ve0ieq4n.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy53m82cicj30e20900sp.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fy4y1pyc1cj30nj0dyq3j.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fy4z1egistj308b0bh3yf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fy4m1av5y4j319g0sqdko.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy4x8l2aiqj30cv02jaaa.jpg">
+<meta property="article:published_time" content="2019-03-02T09:41:35.696Z">
+<meta property="article:modified_time" content="2019-03-02T10:32:05.464Z">
+<meta property="article:author" content="Rocco">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fy49et602cj302n0ajt8h.jpg">
+
+
+<link rel="canonical" href="https://roccowong95.github.io/2019/03/02/%E5%86%85%E5%AD%98%E6%9D%82%E7%83%A9/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://roccowong95.github.io/2019/03/02/%E5%86%85%E5%AD%98%E6%9D%82%E7%83%A9/","path":"2019/03/02/内存杂烩/","title":"内存杂烩"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>内存杂烩 | Rocco's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/%5Bobject%20Object%5D" alt="Rocco's Blog">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rocco's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#x86%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E5%88%86%E6%AE%B5%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">x86架构下的分段机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">内存寻址过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.</span> <span class="nav-text">三类地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.1.</span> <span class="nav-text">逻辑地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.2.</span> <span class="nav-text">线性地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80"><span class="nav-number">2.1.3.</span> <span class="nav-text">物理地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">几个寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">几个表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80-%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80-%E6%AE%B5%E6%9C%BA%E5%88%B6"><span class="nav-number">2.4.</span> <span class="nav-text">逻辑地址-&gt;线性地址(段机制)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80-%E9%A1%B5%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.</span> <span class="nav-text">线性地址-&gt;物理地址(页机制)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numa"><span class="nav-number">3.1.</span> <span class="nav-text">numa</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proc-meminfo"><span class="nav-number">3.2.</span> <span class="nav-text">&#x2F;proc&#x2F;meminfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">伙伴算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slab"><span class="nav-number">3.4.</span> <span class="nav-text">slab</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%8F%82%E6%95%B0-proc-sys-vm"><span class="nav-number">4.</span> <span class="nav-text">内存分配参数(&#x2F;proc&#x2F;sys&#x2F;vm)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rocco</p>
+  <div class="site-description" itemprop="description">Prepare for the worst.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://roccowong95.github.io/2019/03/02/%E5%86%85%E5%AD%98%E6%9D%82%E7%83%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rocco">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rocco's Blog">
+      <meta itemprop="description" content="Prepare for the worst.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="内存杂烩 | Rocco's Blog">
+      <meta itemprop="description" content="梳理了一下内存相关的一些内容. 写的有点乱.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          内存杂烩
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2019-03-02 17:41:35 / 修改时间：18:32:05" itemprop="dateCreated datePublished" datetime="2019-03-02T17:41:35+08:00">2019-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Digest/" itemprop="url" rel="index"><span itemprop="name">Digest</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">梳理了一下内存相关的一些内容. 写的有点乱.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="x86架构下的分段机制"><a href="#x86架构下的分段机制" class="headerlink" title="x86架构下的分段机制"></a>x86架构下的分段机制</h1><p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fy49et602cj302n0ajt8h.jpg"></p>
+<ul>
+<li>代码段(text): 存放可执行指令. 出于安全原因, 代码段只读.</li>
+<li>数据段(data): 已初始化的变量和全局变量.</li>
+<li>BSS端(block started by symbol): 未初始化变量, 全是0.</li>
+<li>栈(stack): 函数调用栈, 上下文, 参数, 返回值.</li>
+<li>堆(heap): 可以由进程动态分配.</li>
+</ul>
+<h1 id="内存寻址过程"><a href="#内存寻址过程" class="headerlink" title="内存寻址过程"></a>内存寻址过程</h1><p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fy3ckwaxf8j30qc0k4q4o.jpg"></p>
+<p>当一条指令需要访问内存时, 会由逻辑地址-&gt; 线性地址(虚拟地址)-&gt; 物理内存地址, 最终得到真正需要读取的内存地址.</p>
+<h2 id="三类地址"><a href="#三类地址" class="headerlink" title="三类地址"></a>三类地址</h2><h3 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h3><p>逻辑地址由段选择码(segment selector)和偏移量(offset)组成.<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fy3ecqix4uj30ma0a2wfh.jpg"></p>
+<h3 id="线性地址"><a href="#线性地址" class="headerlink" title="线性地址"></a>线性地址</h3><p>虚拟地址是进程视角的内存地址.</p>
+<h3 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h3><p>实际上真正需要读取的内存的地址.</p>
+<h2 id="几个寄存器"><a href="#几个寄存器" class="headerlink" title="几个寄存器"></a>几个寄存器</h2><p>下面几个寄存器用来存放段选择码. 都是16位. 15-3(index)存放 GDT 或者 LDT 表中的下标. 2(TI)存放 GDT 还是 LDT. 1-0(RPL)存放权限信息, linux 下只有0和3, 分别是内核级和用户级.</p>
+<ul>
+<li>CS: 保存 code segment selector.</li>
+<li>SS: 保存 stack segment selector.</li>
+<li>DS: 保存 data segment selector.</li>
+<li>ES, FS, GS: 随便用.</li>
+</ul>
+<p>下面两个用于快速寻找段描述符表.</p>
+<ul>
+<li>GDTR: 存放 GDT 表的位置和大小.</li>
+<li>LDTR: 存放 LDT 表的位置和大小.</li>
+</ul>
+<h2 id="几个表"><a href="#几个表" class="headerlink" title="几个表"></a>几个表</h2><p>每个段都由8字节的段描述符来表示. 段描述符存放在 GDT(Global Descriptor Table) 或者 LDT(Local Descriptor Table) 中. 顾名思义, 一般只有一个 GDT 表, 而每个进程可以有自己的 LDT 表.<br>GDT,LDT 表的位置和大小, 存放在GDTR,LDTR 寄存器里.</p>
+<h2 id="逻辑地址-线性地址-段机制"><a href="#逻辑地址-线性地址-段机制" class="headerlink" title="逻辑地址-&gt;线性地址(段机制)"></a>逻辑地址-&gt;线性地址(段机制)</h2><p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy4hveyb98j30ni0dqwfn.jpg"></p>
+<ol>
+<li>根据指令性质, 决定去读哪个段寄存器(CS, ES, DS, FS, GS, SS)中的段选择码.</li>
+<li>根据选择码中的TI确定需要去哪张表(GDT, LDT)找段描述符, 以及去读哪个寄存器(GDTR, LDTR).</li>
+<li>找到地址描述符, <ul>
+<li>根据信息判断是否越界.</li>
+<li>判断是否越权.</li>
+</ul>
+</li>
+<li>描述符中的 base addr+指令中的 offset, 得到线性地址.</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy4hlkzp7mj30se0fgab8.jpg"></p>
+<p>如上图所示, linux 中只使用了代码段和数据段, 再往下深究可以发现, 代码段和数据段的起始线性地址都是0x00000000, 段限都是0xfffffff(4GB), 这样逻辑地址在计算后会得到与之相同的线性(虚拟)地址, 实际上就是偏移(offset). 具体的分析可以看上面的<a href="http://www.ilinuxkernel.com/files/Linux_Memory_Address_Mapping.pdf">Linux_Memory_Address_Mapping.pdf</a>.</p>
+<p>早期的 x86 架构下, offset 不足以直接表述内存, 所以采用了分段, 现代处理器的 offset 达到了32位, 已经足够覆盖4GB的内存空间了, 分段就没什么必要了.</p>
+<h2 id="线性地址-物理地址-页机制"><a href="#线性地址-物理地址-页机制" class="headerlink" title="线性地址-&gt;物理地址(页机制)"></a>线性地址-&gt;物理地址(页机制)</h2><p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fy4l978dwvj30ve0ieq4n.jpg"><br>上面的 cr3寄存器, 保存在每个进程的mm_struct 数据结构中.<br>线性地址是连续的, 实际上并不是. 分页机制使得内存分配更为灵活, 并且允许进程的线性地址空间比物理内存大.<br>32位的情况下, 我们的进程虚拟内存空间最大就4GB, 所以32位机器的物理内存如果再大的话, 也没啥用了(启用 PAE 扩展的情况下, 可以使物理总线达到36根, 从而能够允许进程访问64GB 的虚拟内存. <a href="http://www.ilinuxkernel.com/files/Linux_Memory_Address_Mapping.pdf">PAE可以看这里</a>).<br>但64位的情况下, 虚拟内存空间有2^64这么大, 物理内存就很难跟上了, 我们必须分页. 分页又带来一个问题, 我们需要保存每个页的实际位置, 这个信息在64位情况下也非常大. 如果我们只有一级页表, 物理内存甚至放不下. 所以需要多级页表, 最终使得最高层的页表足够小, 这样我们总能通过最高层页表一级一级找到需要的数据(数据和页表都可能被 swap 出去).</p>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy53m82cicj30e20900sp.jpg"></p>
+<h2 id="numa"><a href="#numa" class="headerlink" title="numa"></a>numa</h2><p>uma 架构下, 所有 cpu 访问内存走的是一组总线, 这样很容易导致瓶颈发生.</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fy4y1pyc1cj30nj0dyq3j.jpg"></p>
+<p>numa架构下, 处理器与几个内存相关联, 组成 node, node又进一步分为若干 zone. node 内部的访问很快, node 之间的访问会慢一些, 这样整体提高了吞吐量, 但也会带来一些问题, 可能会导致内存在不同的 node 间分布不均. 见<a href="https://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/">这里</a>.</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy4z1egistj308b0bh3yf.jpg"></p>
+<p>每个 node 有一个 kswapd 进程, 来管理内存页的回收.</p>
+<ul>
+<li>当 pages_free&lt;pages_min时, 申请内存的进程需要等待内存回收(同步回收).</li>
+<li>当 pages_min&lt;pages_free&lt;pages_low时, kswapd被唤醒, 开始进行异步回收.</li>
+<li>当 pages_free&gt;pages_high时, kswapd 被关闭.</li>
+</ul>
+<h2 id="proc-meminfo"><a href="#proc-meminfo" class="headerlink" title="&#x2F;proc&#x2F;meminfo"></a>&#x2F;proc&#x2F;meminfo</h2><ul>
+<li>memfree: 尚未使用的内存.</li>
+<li>memavailable: <strong>估计值</strong>. 会用 memfree 加上预估的, 可以回收的内存. 如 cached, slab.</li>
+<li>buffers 表示块设备(block device)所占用的缓存页，包括：直接读写块设备、以及文件系统元数据(metadata)比如SuperBlock所使用的缓存页；</li>
+<li>cached: 表示普通文件数据所占用的缓存页(<a href="https://stackoverflow.com/questions/13024087/what-are-memory-mapped-page-and-anonymous-page">file-backed pages</a>).</li>
+<li>swap cache: 匿名页的缓存. 进程的内存页分两种, 一个与文件对应的内存页, 一个是匿名内存页, 如 malloc 调用申请的. 与文件对应的内存页(mmap将文件映射进内存)在 pageout 和 pagein 的时候, 直接操作文件, 但匿名内存页没有文件对应, 需要写进交换区, 在 pageout 和 pagein 时, 会写入 swap cache.</li>
+</ul>
+<h2 id="伙伴算法"><a href="#伙伴算法" class="headerlink" title="伙伴算法"></a>伙伴算法</h2><p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy4m1av5y4j319g0sqdko.jpg"><br>这样的算法能够实现物理内存的分配, 但也带来了内部碎片问题.</p>
+<h2 id="slab"><a href="#slab" class="headerlink" title="slab"></a>slab</h2><p>slab 机制能够为内核较小较频繁的内存申请提供方便. 当 slab 为较小的内存申请分配内存并且用完归还时, 他并不直接返回, 而是缓存起来, 等待下次小量内存申请使用, 这样避免了频繁的物理内存分配与回收.</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy4x8l2aiqj30cv02jaaa.jpg"></p>
+<h1 id="内存分配参数-proc-sys-vm"><a href="#内存分配参数-proc-sys-vm" class="headerlink" title="内存分配参数(&#x2F;proc&#x2F;sys&#x2F;vm)"></a><a href="http://balodeamit.blogspot.com/2015/11/deep-dive-into-linux-memory-management.html">内存分配参数(&#x2F;proc&#x2F;sys&#x2F;vm)</a></h1><ul>
+<li>vm.zone_reclaim_mode:<ul>
+<li>0: 当内存不足时, 会去其他 node 分配.</li>
+</ul>
+</li>
+<li>vm.dirty_writeback_centisecs: bdi 周期性的检查脏页并写回.</li>
+<li>vm.dirty_background_ratio, vm.dirty_background_bytes(两者互斥, 把另一个设置成0): 当脏数据占（MemFree + Cached - Mapped）的总比例超过这个数值的时候, bdi 会开始写回脏数据(background).</li>
+<li>vm.dirty_ratio, vm.dirty_bytes(互斥): 造成超过这个比例的进程会阻塞, 把脏数据写出去. 跑 io 不大的进程时, 小 DBR, 大 DR, 会更好些. 当高频写同一个文件时, 可以把 DBR 调大一些, 不让冗余写落到磁盘.</li>
+<li>vm.dirty_expire_centisecs: 最长处于 cache 状态多久.</li>
+</ul>
+<p><code>cat /proc/vmstat | egrep &quot;dirty|writeback&quot;</code>这样可以查看脏数据相关信息.</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li>GDT 表存在哪里?<ul>
+<li>内存中. 其具体的位置写在 GDTR 寄存器里.</li>
+</ul>
+</li>
+<li>为什么要用分级分页方式?<ul>
+<li>假设只有一层页表. 我们</li>
+<li><a href="https://stackoverflow.com/questions/9834542/why-using-hierarchical-page-tables">这里</a>有个问题: 考虑一个64位机器, 4KB 页, 4GB 物理内存.</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.kerneltravel.net/journal/v/mem.htm">内存观点</a><br><a href="https://blog.csdn.net/gatieme/article/details/52384965">深入理解Linux内存管理-之-目录导航 - AderStep - CSDN博客</a><br><a href="https://povilasv.me/go-memory-management/">Go Memory Management - Povilas Versockas</a><br><a href="http://www.ilinuxkernel.com/files/Linux_Memory_Address_Mapping.pdf">Linux_Memory_Address_Mapping.pdf</a><br><a href="https://electronics.stackexchange.com/questions/94924/what-is-the-global-descriptor-table-memory-type">cpu - What is the Global Descriptor Table memory type? - Electrical Engineering Stack Exchange</a><br><a href="https://en.wikibooks.org/wiki/X86_Assembly/Global_Descriptor_Table">X86 Assembly&#x2F;Global Descriptor Table - Wikibooks, open books for an open world</a><br><a href="http://balodeamit.blogspot.com/2015/11/deep-dive-into-linux-memory-management.html">Deep dive into linux memory management | TechTalks</a><br><a href="https://medium.com/hungys-blog/linux-kernel-memory-addressing-a0d304283af3">Linux Kernel: Memory Addressing – Hungys.blog() – Medium</a><br><a href="https://linux-audit.com/understanding-memory-information-on-linux-systems/">Understanding memory information on Linux systems - Linux Audit</a><br><a href="https://unix.stackexchange.com/questions/109651/why-do-the-data-and-code-segments-completely-overlap-in-linux">memory - Why do the data and code segments completely overlap in Linux? - Unix &amp; Linux Stack Exchange</a><br><a href="https://stackoverflow.com/questions/9834542/why-using-hierarchical-page-tables">linux kernel - Why using hierarchical page tables? - Stack Overflow</a><br><a href="https://stackoverflow.com/questions/11671527/multi-level-page-tables-hierarchical-paging">memory management - Multi-level page tables Hierarchical paging - Stack Overflow</a><br><a href="https://stackoverflow.com/questions/9834542/why-using-hierarchical-page-tables">linux kernel - Why using hierarchical page tables? - Stack Overflow</a><br><a href="http://cenalulu.github.io/linux/numa/">NUMA架构的CPU – 你真的用好了么？ • cenalulu’s Tech Blog</a><br><a href="https://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/">The MySQL “swap insanity” problem and the effects of the NUMA architecture – Jeremy Cole</a><br><a href="http://linuxperf.com/?p=142">&#x2F;proc&#x2F;meminfo之谜 | Linux Performance</a><br><a href="https://stackoverflow.com/questions/13024087/what-are-memory-mapped-page-and-anonymous-page">linux - What are memory mapped page and anonymous page? - Stack Overflow</a><br><a href="https://unix.stackexchange.com/questions/76970/how-do-pdflush-kjournald-swapd-etc-interoperate">linux - How do pdflush, kjournald, swapd, etc interoperate? - Unix &amp; Linux Stack Exchange</a><br><a href="https://blog.csdn.net/qqqqqq999999/article/details/77481899">linux pagecache bdi writeback 机制 - qqqqqq999999的专栏 - CSDN博客</a><br><a href="https://stackoverflow.com/questions/27900221/difference-between-vm-dirty-ratio-and-vm-dirty-background-ratio/27902157">linux - Difference between vm.dirty_ratio and vm.dirty_background_ratio? - Stack Overflow</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/03/golang%20%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" rel="next" title="golang 内存分配">
+                  golang 内存分配 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rocco</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
