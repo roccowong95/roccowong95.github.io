@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm22'  # 缓存 npm 依赖，加速构建
+          cache: 'npm'  # 缓存 npm 依赖，加速构建
 
       - name: Install dependencies
         run: npm ci  # 使用 ci 比 install 更快、更可靠
