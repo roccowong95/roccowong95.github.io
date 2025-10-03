@@ -65,5 +65,6 @@ jobs:
           git commit -m "Deploy static files from raw branch (commit ${{ github.sha }})"
 
           # 强制推送到 master
-          git push --force --quiet "https://${{ secrets.GH_TOKEN }}@github.com/roccowong95/roccowong95.github.io.git" master:master
-          #git push origin master --force
+          git remote add origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/roccowong95/roccowong95.github.io.git
+          #git push --force --quiet "https://${{ secrets.GH_TOKEN }}@github.com/roccowong95/roccowong95.github.io.git" master:master
+          git push origin master --force
