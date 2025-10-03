@@ -48,7 +48,7 @@ jobs:
           echo "[![Build Status](https://github.com/roccowong95/roccowong95.github.io/workflows/Deploy%20Hexo%20to%20Master/badge.svg?branch=raw)](https://github.com/roccowong95/roccowong95.github.io/actions)" >> README.md
 
           # 添加远程仓库（使用 token 认证）
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          #git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
           # 切换到 master 分支（如果不存在则创建）
           #git checkout master
@@ -63,6 +63,7 @@ jobs:
           # 添加所有文件并提交
           git add -A
           git commit -m "Deploy static files from raw branch (commit ${{ github.sha }})"
+          git push --force --quiet "https://${{ secrets.GH_TOKEN }}@github.com/roccowong95/roccowong95.github.io.git" master:master
 
           # 强制推送到 master
           git push origin master --force
