@@ -63,7 +63,7 @@ jobs:
           # 添加所有文件并提交
           git add -A
           git commit -m "Deploy static files from raw branch (commit ${{ github.sha }})"
-          git push --force --quiet "https://${{ secrets.GH_TOKEN }}@github.com/roccowong95/roccowong95.github.io.git" master:master
 
           # 强制推送到 master
-          git push origin master --force
+          git push --force --quiet "https://${{ secrets.GH_TOKEN }}@github.com/roccowong95/roccowong95.github.io.git" master:master
+          #git push origin master --force
