@@ -1,0 +1,57 @@
+name: Deploy Hexo to Master
+
+on:
+  push:
+    branches: [ raw ]
+    paths-ignore:  # 可选：忽略某些文件变化不触发
+      - 'public/**'
+      - 'node_modules/**'
+      - '.github/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout raw branch
+        uses: actions/checkout@v4
+        with:
+          ref: raw
+          fetch-depth: 0  # 获取完整历史，便于 commit
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'  # 缓存 npm 依赖，加速构建
+
+      - name: Install dependencies
+        run: npm ci  # 使用 ci 比 install 更快、更可靠
+
+      - name: Generate Hexo site
+        run: npx hexo generate  # 生成到 public 目录
+
+      - name: Deploy to master branch
+        run: |
+          # 配置 Git 用户信息
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # 添加远程仓库（使用 token 认证）
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          # 切换到 master 分支（如果不存在则创建）
+          git checkout master
+
+          # 清空 master 分支现有内容（保留 .git）
+          git rm -rf .
+
+          # 复制 public 目录内容到根目录
+          cp -r public/* .
+          cp -r public/.* . 2>/dev/null || true  # 复制隐藏文件，如果存在
+
+          # 添加所有文件并提交
+          git add -A
+          git commit -m "Deploy static files from raw branch (commit ${{ github.sha }})"
+
+          # 强制推送到 master
+          git push origin master --force
